@@ -158,26 +158,26 @@ require('lazy').setup {
         }
       end,
     },
-    {
-      'saghen/blink.cmp',
-      event = 'InsertEnter',
-      version = '*',
-      opts = {
-        keymap = {
-          ['<CR>'] = { 'accept', 'fallback' },
-          ['<C-e>'] = { 'hide', 'fallback' },
-          ['<Tab>'] = { 'select_next', 'fallback' },
-          ['<S-Tab>'] = { 'select_prev' },
-        },
-        sources = {
-          cmdline = {},
-        },
-      },
-    },
-    {
-      'wakatime/vim-wakatime',
-      event = 'BufReadPost',
-    },
+    -- {
+    --   'saghen/blink.cmp',
+    --   event = 'InsertEnter',
+    --   version = '*',
+    --   opts = {
+    --     keymap = {
+    --       ['<CR>'] = { 'accept', 'fallback' },
+    --       ['<C-e>'] = { 'hide', 'fallback' },
+    --       ['<Tab>'] = { 'select_next', 'fallback' },
+    --       ['<S-Tab>'] = { 'select_prev' },
+    --     },
+    --     sources = {
+    --       cmdline = {},
+    --     },
+    --   },
+    -- },
+    -- {
+    --   'wakatime/vim-wakatime',
+    --   event = 'BufReadPost',
+    -- },
     {
       'stevearc/conform.nvim',
       event = 'BufWritePre',
@@ -193,110 +193,110 @@ require('lazy').setup {
         }
       end,
     },
-    {
-      'neovim/nvim-lspconfig',
-      event = { 'BufReadPre', 'BufNewFile' },
-      config = function()
-        vim.api.nvim_create_autocmd('LspAttach', {
-          callback = function(args)
-            local function keymap(lhs, rhs, desc, mode)
-              mode = mode or 'n'
-              vim.keymap.set(mode, lhs, rhs, { buffer = 0, desc = desc })
-            end
-            local client = vim.lsp.get_client_by_id(args.data.client_id)
-            if client == nil then
-              return
-            end
-            if client.supports_method 'textDocument/signatureHelp' then
-              local blink_window = require 'blink.cmp.completion.windows.menu'
-              local blink = require 'blink.cmp'
-              keymap('K', function()
-                if blink_window.win:is_open() then
-                  blink.hide()
-                end
-                vim.lsp.buf.signature_help()
-              end, 'signature help', 'i')
-            end
-            if client.supports_method 'textDocument/definition' then
-              keymap(
-                '<leader>gD',
-                '<cmd>FzfLua lsp_definitions<cr>',
-                'Peek definition'
-              )
-            end
-            if client.supports_method 'textDocument/formatting' then
-              vim.api.nvim_create_autocmd('BufWritePre', {
-                buffer = args.buf,
-                callback = function()
-                  vim.lsp.buf.format { bufnr = args.buf, id = client.id }
-                end,
-              })
-            end
-          end,
-        })
-
-        require('lspconfig').lua_ls.setup {
-          on_init = function(client)
-            local path = client.workspace_folders
-              and client.workspace_folders[1]
-              and client.workspace_folders[1].name
-            if not path then
-              client.config.settings =
-                vim.tbl_deep_extend('force', client.config.settings, {
-                  Lua = {
-                    runtime = {
-                      version = 'LuaJIT',
-                    },
-                    workspace = {
-                      checkThirdParty = false,
-                      library = {
-                        vim.env.VIMRUNTIME,
-                        '${3rd}/luv/library',
-                      },
-                    },
-                  },
-                })
-              client.notify(
-                vim.lsp.protocol.Methods.workspace_didChangeConfiguration,
-                { settings = client.config.settings }
-              )
-            end
-
-            return true
-          end,
-          settings = {
-            Lua = {
-              format = { enable = false },
-              hint = {
-                enable = true,
-                arrayIndex = 'Disable',
-              },
-              completion = { callSnippet = 'Replace' },
-            },
-          },
-        }
-      end,
-    },
-    {
-      'nvim-treesitter/nvim-treesitter',
-      version = false,
-      build = ':TSUpdate',
-      event = { 'BufReadPre', 'BufNewFile' },
-      opts = {
-        ensure_installed = {
-          'gitcommit',
-          'json',
-          'json5',
-          'jsonc',
-          'lua',
-          'nix',
-        },
-        highlight = { enable = true },
-      },
-      config = function(_, opts)
-        require('nvim-treesitter.configs').setup(opts)
-      end,
-    },
+    -- {
+    --   'neovim/nvim-lspconfig',
+    --   event = { 'BufReadPre', 'BufNewFile' },
+    --   config = function()
+    --     vim.api.nvim_create_autocmd('LspAttach', {
+    --       callback = function(args)
+    --         local function keymap(lhs, rhs, desc, mode)
+    --           mode = mode or 'n'
+    --           vim.keymap.set(mode, lhs, rhs, { buffer = 0, desc = desc })
+    --         end
+    --         local client = vim.lsp.get_client_by_id(args.data.client_id)
+    --         if client == nil then
+    --           return
+    --         end
+    --         if client.supports_method 'textDocument/signatureHelp' then
+    --           local blink_window = require 'blink.cmp.completion.windows.menu'
+    --           local blink = require 'blink.cmp'
+    --           keymap('K', function()
+    --             if blink_window.win:is_open() then
+    --               blink.hide()
+    --             end
+    --             vim.lsp.buf.signature_help()
+    --           end, 'signature help', 'i')
+    --         end
+    --         if client.supports_method 'textDocument/definition' then
+    --           keymap(
+    --             '<leader>gD',
+    --             '<cmd>FzfLua lsp_definitions<cr>',
+    --             'Peek definition'
+    --           )
+    --         end
+    --         if client.supports_method 'textDocument/formatting' then
+    --           vim.api.nvim_create_autocmd('BufWritePre', {
+    --             buffer = args.buf,
+    --             callback = function()
+    --               vim.lsp.buf.format { bufnr = args.buf, id = client.id }
+    --             end,
+    --           })
+    --         end
+    --       end,
+    --     })
+    --
+    --     require('lspconfig').lua_ls.setup {
+    --       on_init = function(client)
+    --         local path = client.workspace_folders
+    --           and client.workspace_folders[1]
+    --           and client.workspace_folders[1].name
+    --         if not path then
+    --           client.config.settings =
+    --             vim.tbl_deep_extend('force', client.config.settings, {
+    --               Lua = {
+    --                 runtime = {
+    --                   version = 'LuaJIT',
+    --                 },
+    --                 workspace = {
+    --                   checkThirdParty = false,
+    --                   library = {
+    --                     vim.env.VIMRUNTIME,
+    --                     '${3rd}/luv/library',
+    --                   },
+    --                 },
+    --               },
+    --             })
+    --           client.notify(
+    --             vim.lsp.protocol.Methods.workspace_didChangeConfiguration,
+    --             { settings = client.config.settings }
+    --           )
+    --         end
+    --
+    --         return true
+    --       end,
+    --       settings = {
+    --         Lua = {
+    --           format = { enable = false },
+    --           hint = {
+    --             enable = true,
+    --             arrayIndex = 'Disable',
+    --           },
+    --           completion = { callSnippet = 'Replace' },
+    --         },
+    --       },
+    --     }
+    --   end,
+    -- },
+    -- {
+    --   'nvim-treesitter/nvim-treesitter',
+    --   version = false,
+    --   build = ':TSUpdate',
+    --   event = { 'BufReadPre', 'BufNewFile' },
+    --   opts = {
+    --     ensure_installed = {
+    --       'gitcommit',
+    --       'json',
+    --       'json5',
+    --       'jsonc',
+    --       'lua',
+    --       'nix',
+    --     },
+    --     highlight = { enable = true },
+    --   },
+    --   config = function(_, opts)
+    --     require('nvim-treesitter.configs').setup(opts)
+    --   end,
+    -- },
     defaults = {
       lazy = true,
     },
@@ -322,6 +322,9 @@ require('lazy').setup {
           'tohtml',
           'tutor',
           'zipPlugin',
+          'nvim-treesitter',
+          'lspconfig',
+          'blink.cmp',
         },
       },
     },
