@@ -1,7 +1,7 @@
 
 # Occult Umbral for Neovim
 
-Simple port of [Noctalia's](noctalia.dev) Occult Umbral theme.
+Simple port of [Noctalia's](noctalia.dev) Occult Umbral theme, now in neovim.
 
 <img width="2533" height="1393" alt="occult-umbral-ex" src="https://github.com/user-attachments/assets/45f2c5b7-e38e-48b4-a5d6-04020d211388" />
 
