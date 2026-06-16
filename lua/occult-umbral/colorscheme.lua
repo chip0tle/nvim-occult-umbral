@@ -1,4 +1,4 @@
-local config = require 'my-theme.config'
+local config = require 'occult-umbral.config'
 
 local colorscheme = {
   standardWhite = '#ffffff',
@@ -59,14 +59,17 @@ else
   colorscheme.focusedBorder = '#444444'
   colorscheme.emphasizedBorder = '#363636'
 
-  colorscheme.syntaxError = '#C25B5B'
-  colorscheme.syntaxFunction = '#6270A8'
+  -- colorscheme.syntaxFunction = '#6270A8'
+  -- colorscheme.syntaxError = '#C25B5B'
+  colorscheme.syntaxFunction = '#C25B5B'
+  colorscheme.syntaxError = '#8BAA82'
   colorscheme.warningText = '#E6C27A'
   colorscheme.syntaxKeyword = '#9A7398'
   colorscheme.linkText = '#95B3B0'
   colorscheme.stringText = '#BFBC88'
   colorscheme.warningEmphasis = '#DBA843'
-  colorscheme.successText = '#8BAA82'
+  -- colorscheme.successText = '#8BAA82'
+  colorscheme.successText = '#6270A8'
   colorscheme.errorText = '#A83A3A'
   colorscheme.specialKeyword = '#784775'
   colorscheme.commentText = '#6b737c'

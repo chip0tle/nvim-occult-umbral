@@ -1,8 +1,8 @@
-local bufferline = require 'my-theme.integrations.bufferline'
-local cmp = require 'my-theme.integrations.cmp'
-local colorscheme = require 'my-theme.colorscheme'
-local config = require 'my-theme.config'
-local utils = require 'my-theme.utils'
+local bufferline = require 'occult-umbral.integrations.bufferline'
+local cmp = require 'occult-umbral.integrations.cmp'
+local colorscheme = require 'occult-umbral.colorscheme'
+local config = require 'occult-umbral.config'
+local utils = require 'occult-umbral.utils'
 local theme = {}
 
 local function set_terminal_colors()
