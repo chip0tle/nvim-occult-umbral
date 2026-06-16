@@ -1,13 +1,30 @@
-# Neovim Colorscheme Template
+# Occult Umbral for Neovim
 
-This aims to make your life a lot easier when creating your colorscheme. You should change change colors, names and do a bit of fine tuning for your specific needs! If you like the project, leave a star here.
+Simple port of [Noctalia's](noctalia.dev) Occult Umbral theme.
+
+## Installation
+
+Use your package manager! I prefer Lazy:
+
+### [lazy.nvim](lazy.folke.io/installation)
+```lua
+-- lua/plugins/occult-umbral.lua
+return {
+    "chip0tle/occult-umbral",
+    name = "occult-umbral",
+    config = function()
+        vim.cmd("colorscheme occult-umbral")
+    end
+}
+```
+
+
+## Notes
+
+Special thanks to [datsfilipe](github.com/datsfilipe) for their [colorscheme template](https://github.com/datsfilipe/nvim-colorscheme-template)!
+
+- Currently only dark mode theme is available, light mode WIP.
 
 ## Contributing
 
-Contributions are welcome, please open an issue if you encounter any bug or if you find any improvements are needed for the code, also feel free to open a PR.
-
-Take a look at the [Development Guide](./DEVELOPMENT_GUIDE.md)
-
-## License
-
-[MIT License](LICENSE) 
+*Not gonna pretend that I seriously know what I'm doing so any PRs are welcome.*
